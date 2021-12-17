@@ -20,6 +20,9 @@
     "prettier-fix": "node run prettier-fix",
     "watch": "node run watch"
   },
+  "publishConfig":{
+    "access":"public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/villedemontreal/node-logger.git"
