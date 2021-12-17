@@ -1,4 +1,4 @@
-# @villemontreal/core-utils-logger-nodejs-lib
+# @villedemontreal/logger
 
 Logger pour applications Node.
 
@@ -8,14 +8,11 @@ nom de l'application, etc.
 _Important_ : La configuration `correlationIdProvider` est requise! Votre application
 (ou API) _doit_ passer le provider à utiliser...
 
-## Availabililty
-
-https://bitbucket.org/core-utils-logger-nodejs-lib
 
 ## Installation
 
 ```shell
-    npm install @villemontreal/core-utils-logger-nodejs-lib
+    npm install @villedemontreal/logger
 ```
 
 ## Usage
