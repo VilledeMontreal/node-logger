@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/logger",
-  "version": "6.5.1",
+  "version": "6.5.2",
   "description": "Logger and logging utilities",
   "main": "dist/src/index.js",
   "typings": "dist/src",
@@ -41,7 +41,7 @@
     "@types/pino": "6.3.5",
     "@types/pino-multi-stream": "5.1.0",
     "@types/source-map-support": "0.5.4",
-    "@villedemontreal/general-utils": "5.16.0",
+    "@villedemontreal/general-utils": "5.16.2",
     "app-root-path": "3.0.0",
     "lodash": "4.17.21",
     "pino": "6.11.0",
