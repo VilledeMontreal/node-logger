@@ -12,7 +12,7 @@ export class LintScript extends ScriptBase {
 
   protected async main() {
     const projectRoot = resolve(`${configs.root}/..`);
-    await this.invokeShellCommand(`./node_modules/.bin/eslint`, ['.'], {
+    await this.invokeShellCommand(`./node_modules/.bin/eslint`, ["'./**/*.ts'"], {
       cwd: projectRoot,
     } as any);
   }
