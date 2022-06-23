@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import * as http from 'http';
 import * as _ from 'lodash';
 import * as path from 'path';
-import * as pino from 'pino';
-import * as pinoMultiStreams from 'pino-multi-stream';
+import { DestinationStream, pino, StreamEntry } from 'pino';
+import * as pretty from 'pino-pretty';
 import { LoggerConfigs } from './config/configs';
 import { constants } from './config/constants';
 
@@ -115,17 +115,16 @@ export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force 
     return;
   }
 
-  const streams: pinoMultiStreams.Streams = [];
+  const streams: (DestinationStream | StreamEntry)[] = [];
   loggerConfigs = loggerConfig;
   // ==========================================
   // Logs to stdout, potentially in a human friendly
   // format...
   // ==========================================
   if (loggerConfig.isLogHumanReadableinConsole()) {
-    const prettyStream = pinoMultiStreams.prettyStream();
     streams.push({
       level: convertLogLevelToPinoLabelLevel(loggerConfig.getLogLevel()),
-      stream: prettyStream,
+      stream: pretty.default(),
     });
   } else {
     streams.push({
@@ -165,8 +164,8 @@ export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force 
     });
   }
 
-  multistream = pinoMultiStreams.multistream(streams);
-  loggerInstance = pino.default(
+  multistream = pino.multistream(streams);
+  loggerInstance = pino(
     {
       name,
       safe: true,
