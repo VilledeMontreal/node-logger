@@ -1,6 +1,6 @@
 import { ScriptBase } from '@villedemontreal/scripting/dist/src';
+import { resolve } from 'path';
 import { configs } from '../config/configs';
-
 export class LintScript extends ScriptBase {
   get name(): string {
     return 'lint';
@@ -11,7 +11,7 @@ export class LintScript extends ScriptBase {
   }
 
   protected async main() {
-    const projectRoot = `${configs.root}/..`;
+    const projectRoot = resolve(`${configs.root}/..`);
     await this.invokeShellCommand(`./node_modules/.bin/eslint`, ['.'], {
       cwd: projectRoot,
     } as any);

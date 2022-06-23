@@ -1,4 +1,5 @@
 import { ScriptBase } from '@villedemontreal/scripting/dist/src';
+import { resolve } from 'path';
 import { configs } from '../config/configs';
 
 export class LintFixScript extends ScriptBase {
@@ -11,7 +12,7 @@ export class LintFixScript extends ScriptBase {
   }
 
   protected async main() {
-    const projectRoot = `${configs.root}/..`;
+    const projectRoot = resolve(`${configs.root}/..`);
     this.logger.info(`Fixing using Prettier rules`);
     await this.invokeShellCommand(`${projectRoot}/node_modules/.bin/prettier`, ['--write', '.'], {
       cwd: projectRoot,
