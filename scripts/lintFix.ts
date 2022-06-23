@@ -13,9 +13,15 @@ export class LintFixScript extends ScriptBase {
   protected async main() {
     const projectRoot = `${configs.root}/..`;
     this.logger.info(`Fixing using Prettier rules`);
-    await this.invokeShellCommand(`${projectRoot}/node_modules/.bin/prettier`, ['--write', './']);
+    await this.invokeShellCommand(`${projectRoot}/node_modules/.bin/prettier`, [
+      '--write',
+      projectRoot,
+    ]);
 
     this.logger.info(`Fixing using ESLint rules`);
-    await this.invokeShellCommand(`${projectRoot}/node_modules/.bin/eslint`, ['--fix', './']);
+    await this.invokeShellCommand(`${projectRoot}/node_modules/.bin/eslint`, [
+      '--fix',
+      `${projectRoot}/**/*.ts`,
+    ]);
   }
 }
