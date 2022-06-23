@@ -15,29 +15,29 @@ export class LoggerConfigs {
    * Enable logging to a file.
    * Default to false.
    */
-  private logToFile: boolean = false;
+  private logToFile = false;
 
   /**
    * The directory where the potential
    * log file will be written.
    * Default to "./log".
    */
-  private logDir: string = './log';
+  private logDir = './log';
 
   /**
    * Log rotation file nb
    */
-  private logRotateFilesNbr: number = 30;
+  private logRotateFilesNbr = 30;
 
   /**
    * Log rotation threshhold in MB
    */
-  private logRotateThresholdMB: number = 100;
+  private logRotateThresholdMB = 100;
 
   /**
    * Log maximum total size in MB
    */
-  private logRotateMaxTotalSizeMB: number = 1000;
+  private logRotateMaxTotalSizeMB = 1000;
 
   /**
    * Logging level (info, debug, warning, error)
@@ -50,7 +50,7 @@ export class LoggerConfigs {
   /**
    * Log in human readable form in the console.
    */
-  private logHumanReadableinConsole: boolean = false;
+  private logHumanReadableinConsole = false;
 
   /**
    * Add the stack trace to the error log in development
@@ -61,7 +61,7 @@ export class LoggerConfigs {
   /**
    * Log the source of the error in the log message
    */
-  private logSource: boolean = true;
+  private logSource = true;
 
   /**
    * The Correlation Id provider is required.

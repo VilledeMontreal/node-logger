@@ -12,7 +12,7 @@ import {
   initLogger,
   Logger,
   LogLevel,
-  setGlobalLogLevel
+  setGlobalLogLevel,
 } from './logger';
 
 const TESTING_CID = 'test-cid';
@@ -66,20 +66,20 @@ describe('Logger tests', () => {
       // A stadard "function" is required here, because
       // of the use of "arguments".
       // tslint:disable-next-line:only-arrow-functions
-      process.stdout.write = function() {
+      process.stdout.write = function (...args: string[]) {
         if (!expectTwoCalls) {
-          output += arguments[0];
+          output += args[0];
           process.stdout.write = stdoutWriteBackup;
           return;
         }
 
         if (!firstCallDone) {
           if (!keepSecondCallOnly) {
-            output += arguments[0];
+            output += args[0];
           }
           firstCallDone = true;
         } else {
-          output += arguments[0];
+          output += args[0];
           process.stdout.write = stdoutWriteBackup;
         }
       } as any;
@@ -124,10 +124,10 @@ describe('Logger tests', () => {
       logger.error({
         key1: {
           key3: 'val3',
-          key4: 'val4'
+          key4: 'val4',
         },
         key2: 'val2',
-        msg: 'blabla'
+        msg: 'blabla',
       });
       assert.isTrue(!utils.isBlank(output));
 
@@ -136,7 +136,7 @@ describe('Logger tests', () => {
       assert.strictEqual(jsonObj.msg, 'blabla');
       assert.deepEqual(jsonObj.key1, {
         key3: 'val3',
-        key4: 'val4'
+        key4: 'val4',
       });
       assert.isNotNull(jsonObj.src);
       assert.isNotNull(jsonObj.src.file);
@@ -150,10 +150,10 @@ describe('Logger tests', () => {
         {
           key1: {
             key3: 'val3',
-            key4: 'val4'
+            key4: 'val4',
           },
           key2: 'val2',
-          msg: 'blabla'
+          msg: 'blabla',
         },
         'my text message'
       );
@@ -164,7 +164,7 @@ describe('Logger tests', () => {
       assert.strictEqual(jsonObj.msg, 'blabla - my text message');
       assert.deepEqual(jsonObj.key1, {
         key3: 'val3',
-        key4: 'val4'
+        key4: 'val4',
       });
       assert.isNotNull(jsonObj.src);
       assert.isNotNull(jsonObj.src.file);
@@ -229,8 +229,8 @@ describe('Logger tests', () => {
         'toto',
         {
           key1: 'val1',
-          key2: 'val2'
-        }
+          key2: 'val2',
+        },
       ]);
 
       const jsonObj = JSON.parse(output);
@@ -238,8 +238,8 @@ describe('Logger tests', () => {
         'toto',
         {
           key1: 'val1',
-          key2: 'val2'
-        }
+          key2: 'val2',
+        },
       ]);
       assert.isNotNull(jsonObj.src);
       assert.isNotNull(jsonObj.src.file);
@@ -260,8 +260,8 @@ describe('Logger tests', () => {
           'toto',
           {
             key1: 'val1',
-            key2: 'val2'
-          }
+            key2: 'val2',
+          },
         ],
         'my text message'
       );
@@ -271,8 +271,8 @@ describe('Logger tests', () => {
         'toto',
         {
           key1: 'val1',
-          key2: 'val2'
-        }
+          key2: 'val2',
+        },
       ]);
       assert.strictEqual(jsonObj.msg, 'my text message');
       assert.isNotNull(jsonObj.src);
@@ -340,11 +340,11 @@ describe('Logger tests', () => {
 
       logger.error({
         key1: 'val1',
-        key2: 'val2'
+        key2: 'val2',
       });
       logger.error({
         key1: 'val1',
-        key2: 'val2'
+        key2: 'val2',
       });
 
       const pos = output.indexOf('\n');
@@ -390,13 +390,10 @@ describe('Logger tests', () => {
       let lazyLogger: LazyLogger;
 
       beforeEach(async () => {
-        lazyLogger = new LazyLogger(
-          'titi',
-          (name: string): ILogger => {
-            const logger2 = new Logger('titi');
-            return logger2;
-          }
-        );
+        lazyLogger = new LazyLogger('titi', (name: string): ILogger => {
+          const logger2 = new Logger('titi');
+          return logger2;
+        });
       });
 
       it('debug', async () => {
@@ -571,7 +568,7 @@ describe('Logger tests', () => {
     });
   });
 
-  describe('Log to file', function() {
+  describe('Log to file', function () {
     timeout(this, 30000);
 
     let loggerConfig: LoggerConfigs;
@@ -609,7 +606,10 @@ describe('Logger tests', () => {
     async function logAndWait(msg: string) {
       logger.error(msg);
 
-      assert.isFunction(logger[`pino`][`flush`], `The "flush method should exist on a Pino logger"`);
+      assert.isFunction(
+        logger[`pino`][`flush`],
+        `The "flush method should exist on a Pino logger"`
+      );
       logger[`pino`][`flush`]();
 
       const max = 5000;

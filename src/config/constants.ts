@@ -59,7 +59,7 @@ export class Constants {
         /**
          * Correlation id
          */
-        CORRELATION_ID: 'cid'
+        CORRELATION_ID: 'cid',
       },
 
       /**
@@ -69,10 +69,10 @@ export class Constants {
         /**
          * The type for our Ville de Montréal logs.
          */
-        MONTREAL: 'mtl'
-      }
+        MONTREAL: 'mtl',
+      },
     };
   }
 }
 
-export let constants: Constants = new Constants();
+export const constants: Constants = new Constants();

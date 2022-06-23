@@ -1,0 +1,24 @@
+{
+  "check-coverage": true,
+  "per-file": false,
+  "lines": 87,
+  "statements": 88,
+  "functions": 83,
+  "branches": 72,
+  "extension": [
+    ".js",
+    ".ts",
+    ".tsx"
+  ],
+  "exclude": [
+    "**/*.test.js",
+    "**/*.test.ts"
+  ],
+  "reporter": [
+    "text",
+    "lcov"
+  ],
+  "report-dir": "./output/coverage",
+  "cache": true,
+  "temp-directory": "./temp/nycrc"
+}

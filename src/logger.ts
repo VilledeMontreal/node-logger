@@ -21,7 +21,7 @@ export { LogLevel } from '@villedemontreal/general-utils';
 // transpiled Javascript file.
 // ==========================================
 require('source-map-support').install({
-  environment: 'node'
+  environment: 'node',
 });
 
 // ==========================================
@@ -33,7 +33,7 @@ const appVersion = packageJson.version;
 
 let loggerInstance: pino.Logger;
 let loggerConfigs: LoggerConfigs;
-let libIsInited: boolean = false;
+let libIsInited = false;
 
 // Keeping track of all created loggers
 const loggerChildren: Logger[] = [];
@@ -110,7 +110,7 @@ const getLogDirPath = (loggerConfig: LoggerConfigs): string => {
  * @param force if `true`, the logger will be initialized
  *   again even if it already is.
  */
-export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force: boolean = false) => {
+export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force = false) => {
   if (loggerInstance && !force) {
     return;
   }
@@ -125,12 +125,12 @@ export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force:
     const prettyStream = pinoMultiStreams.prettyStream();
     streams.push({
       level: convertLogLevelToPinoLabelLevel(loggerConfig.getLogLevel()),
-      stream: prettyStream
+      stream: prettyStream,
     });
   } else {
     streams.push({
       level: convertLogLevelToPinoLabelLevel(loggerConfig.getLogLevel()),
-      stream: process.stdout
+      stream: process.stdout,
     });
   }
 
@@ -140,9 +140,9 @@ export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force:
   if (loggerConfig.isLogToFile()) {
     const rotatingFilesStream = createRotatingFileStream('application.log', {
       path: getLogDirPath(loggerConfig),
-      size: loggerConfig.getLogRotateThresholdMB() + 'M',
-      maxSize: loggerConfig.getLogRotateMaxTotalSizeMB() + 'M',
-      maxFiles: loggerConfig.getLogRotateFilesNbr()
+      size: `${loggerConfig.getLogRotateThresholdMB()}M`,
+      maxSize: `${loggerConfig.getLogRotateMaxTotalSizeMB()}M`,
+      maxFiles: loggerConfig.getLogRotateFilesNbr(),
     });
 
     // ==========================================
@@ -161,18 +161,18 @@ export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force:
 
     streams.push({
       level: convertLogLevelToPinoLabelLevel(loggerConfig.getLogLevel()),
-      stream: rotatingFilesStream
+      stream: rotatingFilesStream,
     });
   }
 
   multistream = pinoMultiStreams.multistream(streams);
-  loggerInstance = pino(
+  loggerInstance = pino.default(
     {
       name,
       safe: true,
       timestamp: pino.stdTimeFunctions.isoTime, // ISO-8601 timestamps
       messageKey: 'msg',
-      level: convertLogLevelToPinoLabelLevel(loggerConfig.getLogLevel())
+      level: convertLogLevelToPinoLabelLevel(loggerConfig.getLogLevel()),
     },
     multistream
   );
@@ -362,7 +362,7 @@ export class Logger implements ILogger {
         // too bad
       }
       messageObjClean = {
-        _arrayMsg: _.cloneDeep(messageObjClean)
+        _arrayMsg: _.cloneDeep(messageObjClean),
       };
     }
 
@@ -414,7 +414,7 @@ export class Logger implements ILogger {
         } catch (err) {
           messageObjClean.socket = {
             ...messageObjClean.socket,
-            remoteAddress: '[not available]'
+            remoteAddress: '[not available]',
           };
         }
       } else {
@@ -427,11 +427,13 @@ export class Logger implements ILogger {
       // second parameter consisting in the message.
       // ==========================================
       if (txtMsgClean) {
-        messageObjClean.msg = (messageObjClean.msg ? messageObjClean.msg + ' - ' : '') + txtMsgClean;
+        messageObjClean.msg =
+          (messageObjClean.msg ? `${messageObjClean.msg} - ` : '') + txtMsgClean;
       }
     } else {
+      const suffix = txtMsgClean ? ` - ${txtMsgClean}` : '';
       messageObjClean = {
-        msg: messageObjClean + (txtMsgClean ? ` - ${txtMsgClean}` : '')
+        msg: `${messageObjClean}${suffix}`,
       };
     }
 
@@ -543,7 +545,7 @@ export class Logger implements ILogger {
 
     messageObj.src = {
       file: filename,
-      line: lineNo
+      line: lineNo,
     };
 
     return messageObj;
