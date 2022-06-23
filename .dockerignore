@@ -1,0 +1,17 @@
+.*/*
+node_modules/
+log/
+*.log
+test-*/
+config/local.*
+config/local-*.*
+temp
+output
+Dockerfile
+Jenkinsfile
+CONTRIBUTING.md
+.gitignore
+.dockerignore
+d
+runTesting
+runTesting.cmd
