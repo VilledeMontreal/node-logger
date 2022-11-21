@@ -187,7 +187,7 @@ export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force 
 export const setGlobalLogLevel = (level: LogLevel) => {
   if (!loggerInstance) {
     throw new Error(
-      'You must use "initLogger" function in @villemontreal/core-utils-logger-nodejs-lib package before making new instance of Logger class.'
+      'You must use "initLogger" function in @villedemontreal/logger package before making new instance of Logger.'
     );
   }
   // Change the log level and update children accordingly
@@ -241,7 +241,7 @@ export class Logger implements ILogger {
   constructor(name: string) {
     if (!loggerInstance) {
       throw new Error(
-        'You must use "initLogger" function in @villemontreal/core-utils-logger-nodejs-lib package before making new instance of Logger class.'
+        'You must use "initLogger" function in @villedemontreal/logger package before making new instance of Logger.'
       );
     }
     this.pino = loggerInstance.child({ name });
