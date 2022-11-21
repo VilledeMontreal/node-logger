@@ -12,7 +12,7 @@ _Important_ : La configuration `correlationIdProvider` est requise! Votre applic
 ## Installation
 
 ```shell
-    npm install @villedemontreal/logger
+npm install @villedemontreal/logger
 ```
 
 ## Usage
@@ -22,13 +22,13 @@ _Important_ : La configuration `correlationIdProvider` est requise! Votre applic
     créer un Logger associé. Le but de cette indirection est de s'assurer que les Loggers créés sont bien configurés.
 
 ```typescript
-import { correlationIdService } from '@villemontreal/core-correlation-id-nodejs-lib';
+import { correlationIdService } from '@villedemontreal/correlation-id';
 import {
   createLogger as createLoggerBase,
   ILogger,
   initLogger,
   LoggerConfigs
-} from '@villemontreal/core-utils-logger-nodejs-lib';
+} from '@villedemontreal/logger';
 import { configs } from '../../config/configs';
 
 let loggerLibInitialised = false;
@@ -58,7 +58,7 @@ export function createLogger(name: string): ILogger {
 }
 ```
 
-2.  Si c'est une _librairie_ que vous développer (voir [core-nodejs-lib-template](https://bitbucket.org/villemontreal/core-nodejs-lib-template)), vous aurez aussi ce fichier "`src/utils/logger.ts`"
+2.  Si c'est une _librairie_ que vous développez (voir [core-nodejs-lib-template](https://bitbucket.org/villemontreal/core-nodejs-lib-template)), vous aurez aussi ce fichier "`src/utils/logger.ts`"
     mais il ne fera qu'utiliser le "`Logger Creator`" que vous aurez _vous-mêmes_ reçu en configuration! :
 
 ```typescript
@@ -78,9 +78,9 @@ pourrait ne pas encore avoir été configurée lorsque le premier appel à "_`le
 ## Logger dans un fichier
 
 En appelant "`setSlowerLogToFileToo(true)`", vous faites en sorte que les logs se feront dans un fichier en plus de se faire sur le "stdout" standard (la "console"). Vous pouvez spécifier
-le répertoire où les logs autont lieu en utilisant "`setLogDirectory(...)`", qui a la valeur "`./log`" par défaut).
+le répertoire où les logs auront lieu en utilisant "`setLogDirectory(...)`", qui a la valeur "`./log`" par défaut).
 
-Notez que de logger dans un fichier ne devrait être fait qu'en _local_. Sur les autres environnements, nous utilisong Graylog qui utilise ce qui est écrit _dans la console_ pour ses logs!
+Notez que de logger dans un fichier ne devrait être fait qu'en _local_. Sur les autres environnements, nous utilisons Graylog qui s'appuie sur ce qui est écrit _dans la console_.
 
 ## Changer le niveau de log sans redémarrer l'application
 
@@ -91,9 +91,9 @@ import { setGlobalLogLevel } from '@villemontreal/core-utils-logger-nodejs-lib';
 setGlobalLogLevel(LogLevel.DEBUG);
 ```
 
-# Builder le projet
+# Construire le projet
 
-**Note**: Sur Linux/Mac assurz-vous que le fichier `run` est exécutable. Autrement, lancez `chmod +x ./run`.
+**Note**: Sur Linux/Mac assurez-vous que le fichier `run` est exécutable. Autrement, exécutez `chmod +x ./run`.
 
 Pour lancer le build :
 
@@ -116,7 +116,7 @@ incrémentale est un succès ou si une erreur a été trouvée. Vous pouvez dés
 
 # Déboguer le projet
 
-Trois "_launch configurations_" sont founies pour déboguer le projet dans VSCode :
+Trois "_launch configurations_" sont fournies pour déboguer le projet dans VSCode :
 
 - "`Debug all tests`", la launch configuration par défaut. Lance les tests en mode debug. Vous pouvez mettre
   des breakpoints et ils seront respectés.
