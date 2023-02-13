@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/logger",
-  "version": "6.5.8",
+  "version": "6.5.9",
   "description": "Logger and logging utilities",
   "main": "dist/src/index.js",
   "typings": "dist/src",
