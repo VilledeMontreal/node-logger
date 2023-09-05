@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as http from 'http';
 import * as _ from 'lodash';
 import * as path from 'path';
-import { DestinationStream, pino, StreamEntry } from 'pino';
+import { DestinationStream, StreamEntry, pino } from 'pino';
 import * as pretty from 'pino-pretty';
 import { LoggerConfigs } from './config/configs';
 import { constants } from './config/constants';
@@ -64,7 +64,9 @@ export const convertPinoLevelToNumber = (pinoLogLevel: pino.Level): number => {
 export const convertLogLevelToPinoLabelLevel = (logLevel: LogLevel): pino.Level => {
   let pinoLevel: pino.Level = 'error';
   if (logLevel !== undefined) {
-    if ((logLevel as LogLevel) === LogLevel.DEBUG) {
+    if (logLevel === LogLevel.TRACE) {
+      pinoLevel = 'trace';
+    } else if (logLevel === LogLevel.DEBUG) {
       pinoLevel = 'debug';
     } else if (logLevel === LogLevel.INFO) {
       pinoLevel = 'info';
