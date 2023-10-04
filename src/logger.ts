@@ -438,7 +438,9 @@ export class Logger implements ILogger {
       };
     }
 
-    if (level === LogLevel.DEBUG) {
+    if (level === LogLevel.TRACE) {
+      this.pino.trace(this.enhanceLog(messageObjClean));
+    } else if (level === LogLevel.DEBUG) {
       this.pino.debug(this.enhanceLog(messageObjClean));
     } else if (level === LogLevel.INFO) {
       this.pino.info(this.enhanceLog(messageObjClean));
