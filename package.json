@@ -1,6 +1,6 @@
 {
   "name": "@villedemontreal/logger",
-  "version": "6.6.1",
+  "version": "6.6.2",
   "description": "Logger and logging utilities",
   "main": "dist/src/index.js",
   "typings": "dist/src",
@@ -55,7 +55,7 @@
     "@types/fs-extra": "9.0.13",
     "@types/mocha": "10.0.0",
     "@typescript-eslint/eslint-plugin": "5.39.0",
-    "@villedemontreal/scripting": "2.1.6",
+    "@villedemontreal/scripting": "2.1.8",
     "chai": "4.3.6",
     "eslint": "8.24.0",
     "eslint-config-prettier": "8.5.0",
