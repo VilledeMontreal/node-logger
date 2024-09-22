@@ -607,10 +607,10 @@ describe('Logger tests', () => {
       logger.error(msg);
 
       assert.isFunction(
-        logger[`pino`][`flush`],
+        (logger as any)[`pino`][`flush`],
         `The "flush method should exist on a Pino logger"`
       );
-      logger[`pino`][`flush`]();
+      (logger as any)[`pino`][`flush`]();
 
       const max = 5000;
       let elapsed = 0;

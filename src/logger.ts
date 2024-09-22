@@ -4,7 +4,7 @@ import * as http from 'http';
 import * as _ from 'lodash';
 import * as path from 'path';
 import { DestinationStream, StreamEntry, pino } from 'pino';
-import * as pretty from 'pino-pretty';
+import { PinoPretty } from 'pino-pretty';
 import { LoggerConfigs } from './config/configs';
 import { constants } from './config/constants';
 
@@ -126,7 +126,7 @@ export const initLogger = (loggerConfig: LoggerConfigs, name = 'default', force 
   if (loggerConfig.isLogHumanReadableinConsole()) {
     streams.push({
       level: convertLogLevelToPinoLabelLevel(loggerConfig.getLogLevel()),
-      stream: pretty.default(),
+      stream: PinoPretty(),
     });
   } else {
     streams.push({
