@@ -1,3 +1,7 @@
+**WARNING!!!!**
+
+This repository has been transferred here: https://github.com/VilledeMontreal/node-core-libs/tree/main/packages/node-logger
+
 # @villedemontreal/logger
 
 Logger pour applications Node.
